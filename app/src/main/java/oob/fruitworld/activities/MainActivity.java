@@ -1,7 +1,9 @@
-package oob.fruitworld;
+package oob.fruitworld.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import oob.fruitworld.R;
 
 public class MainActivity extends AppCompatActivity {
 
