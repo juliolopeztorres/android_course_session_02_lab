@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">FruitWorld</string>
 
+    <string name="add_fruit">Add Fruit</string>
+
     <string name="fruit_apple_name">Apple</string>
     <string name="fruit_apple_origin">Granada</string>
     <string name="fruit_banana_name">Banana</string>
