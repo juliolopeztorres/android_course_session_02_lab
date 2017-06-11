@@ -3,6 +3,8 @@
 
     <string name="add_fruit">Add Fruit</string>
 
+    <string name="fruit_standard_name">Standard name</string>
+    <string name="fruit_standard_origin">Standard origin</string>
     <string name="fruit_apple_name">Apple</string>
     <string name="fruit_apple_origin">Granada</string>
     <string name="fruit_banana_name">Banana</string>

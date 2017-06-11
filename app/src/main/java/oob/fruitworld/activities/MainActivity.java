@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,18 +16,13 @@ import oob.fruitworld.models.Fruit;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final int FRUIT_INIT_NUMBER = 1;
     private final int FRUIT_NUMBER = 7;
 
+    private int counter;
     private ListView listView;
     private ArrayList<Fruit> fruits;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = this.getMenuInflater();
-        menuInflater.inflate(R.menu.option_menu, menu);
-
-        return true;
-    }
+    private FruitAdapter fruitAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
         this.showIconInActionBard();
 
         this.setVariables();
-        this.initArrayFruits();
-
-        FruitAdapter fruitAdapter = new FruitAdapter(this, R.layout.list_item, this.getFruits());
-        this.getListView().setAdapter(fruitAdapter);
     }
 
     private void showIconInActionBard() {
@@ -55,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setVariables() {
+        this.setCounter(this.FRUIT_INIT_NUMBER);
         this.setListView((ListView) findViewById(R.id.listView));
         this.setFruits(new ArrayList<Fruit>(this.FRUIT_NUMBER));
+        this.initArrayFruits();
+
+        this.setFruitAdapter(new FruitAdapter(this, R.layout.list_item, this.getFruits()));
+        this.getListView().setAdapter(this.getFruitAdapter());
     }
 
     private void initArrayFruits() {
@@ -105,6 +102,44 @@ public class MainActivity extends AppCompatActivity {
         arrayFruit.add(fruit);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = this.getMenuInflater();
+        menuInflater.inflate(R.menu.option_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addFruit:
+                this.addNewStandardFruit();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    private void addNewStandardFruit() {
+        Fruit fruit = new Fruit(
+                getString(R.string.fruit_standard_name) + this.getCounter(),
+                getString(R.string.fruit_standard_origin),
+                R.mipmap.ic_launcher
+        );
+
+        this.getFruits().add(fruit);
+
+        this.getFruitAdapter().notifyDataSetChanged();
+        this.updateCounter();
+    }
+
+    private void updateCounter() {
+        this.setCounter(this.getCounter() + 1);
+    }
+
     // ------------------ Getter & Setters ------------------
 
 
@@ -122,5 +157,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFruits(ArrayList<Fruit> fruits) {
         this.fruits = fruits;
+    }
+
+    public FruitAdapter getFruitAdapter() {
+        return fruitAdapter;
+    }
+
+    public void setFruitAdapter(FruitAdapter fruitAdapter) {
+        this.fruitAdapter = fruitAdapter;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
