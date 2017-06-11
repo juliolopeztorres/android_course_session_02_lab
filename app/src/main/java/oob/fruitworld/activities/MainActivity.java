@@ -13,6 +13,8 @@ import oob.fruitworld.models.Fruit;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final int FRUIT_NUMBER = 7;
+
     private ListView listView;
     private ArrayList<Fruit> fruits;
 
@@ -44,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setVariables() {
         this.setListView((ListView) findViewById(R.id.listView));
-        this.setFruits(new ArrayList<Fruit>(7));
+        this.setFruits(new ArrayList<Fruit>(this.FRUIT_NUMBER));
     }
 
     private void initArrayFruits() {
-        ArrayList<Fruit> arrayFruit = new ArrayList<>(7);
+        ArrayList<Fruit> arrayFruit = this.getFruits();
 
         Fruit fruit = new Fruit(
                 getString(R.string.fruit_apple_name),
@@ -91,18 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.fruit_strawberry_origin),
                 R.mipmap.ic_strawberry);
         arrayFruit.add(fruit);
-
-        this.addArrayFruitInArray(arrayFruit);
-    }
-
-    private void addArrayFruitInArray(ArrayList<Fruit> arrayFruits) {
-        for(Fruit fruit : arrayFruits) {
-            this.addFruitInArray(fruit);
-        }
-    }
-
-    private void addFruitInArray(Fruit fruit) {
-        this.getFruits().add(fruit);
     }
 
     // ------------------ Getter & Setters ------------------
