@@ -76,12 +76,10 @@ public class FruitAdapter extends BaseAdapter{
         return fruitViewHolder;
     }
 
-    private FruitViewHolder populateViewHolder(FruitViewHolder fruitViewHolder, Fruit fruit) {
+    private void populateViewHolder(FruitViewHolder fruitViewHolder, Fruit fruit) {
         fruitViewHolder.setName(fruit.getName());
         fruitViewHolder.setOrigin(fruit.getOrigin());
         fruitViewHolder.setIcon(fruit.getIcon());
-
-        return fruitViewHolder;
     }
 
     // ------------------ Getter & Setters ------------------

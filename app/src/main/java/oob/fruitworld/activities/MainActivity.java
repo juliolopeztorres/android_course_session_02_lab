@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addNewStandardFruit() {
         Fruit fruit = new Fruit(
-                getString(R.string.fruit_standard_name) + this.getCounter(),
+                getString(R.string.fruit_standard_name) + " " + this.getCounter(),
                 getString(R.string.fruit_standard_origin),
                 R.mipmap.ic_launcher
         );

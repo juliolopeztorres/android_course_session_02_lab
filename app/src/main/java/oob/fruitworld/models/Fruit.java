@@ -11,6 +11,8 @@ public class Fruit {
         this.icon = icon;
     }
 
+    // ------------------ Getter & Setters ------------------
+
     public String getName() {
         return name;
     }
