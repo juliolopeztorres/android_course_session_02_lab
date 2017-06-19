@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FruitWorld</string>
+
+    <string name="add_fruit">Add Fruit</string>
+
+    <string name="fruit_standard_name">Standard name</string>
+    <string name="fruit_standard_origin">Standard origin</string>
+    <string name="fruit_apple_name">Apple</string>
+    <string name="fruit_apple_origin">Granada</string>
+    <string name="fruit_banana_name">Banana</string>
+    <string name="fruit_banana_origin">Canary Island</string>
+    <string name="fruit_cherry_name">Cherry</string>
+    <string name="fruit_cherry_origin">Malaga</string>
+    <string name="fruit_orange_name">Orange</string>
+    <string name="fruit_orange_origin">Almeria</string>
+    <string name="fruit_pear_name">Pear</string>
+    <string name="fruit_pear_origin">Jaen</string>
+    <string name="fruit_raspberry_name">Raspberry</string>
+    <string name="fruit_raspberry_origin">Huelva</string>
+    <string name="fruit_strawberry_name">Strawberry</string>
+    <string name="fruit_strawberry_origin">Cadiz</string>
 </resources>
