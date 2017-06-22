@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int counter;
     private ListView listView;
+    private GridView gridView;
     private ArrayList<Fruit> fruits;
-    private FruitAdapter fruitAdapter;
+    private FruitAdapter fruitListAdapter;
+    private FruitAdapter fruitGridAdapter;
 
     private MenuItem showListViewMenuItem;
     private MenuItem showGridViewMenuItem;
@@ -53,11 +56,15 @@ public class MainActivity extends AppCompatActivity {
     private void setVariables() {
         this.setCounter(this.FRUIT_INIT_NUMBER);
         this.setListView((ListView) findViewById(R.id.listView));
+        this.setGridView((GridView) findViewById(R.id.gridView));
         this.setFruits(new ArrayList<Fruit>(this.FRUIT_NUMBER));
         this.initArrayFruits();
 
-        this.setFruitAdapter(new FruitAdapter(this, R.layout.list_item, this.getFruits()));
-        this.getListView().setAdapter(this.getFruitAdapter());
+        this.setFruitListAdapter(new FruitAdapter(this, R.layout.list_item, this.getFruits()));
+        this.setFruitGridAdapter(new FruitAdapter(this, R.layout.grid_item, this.getFruits()));
+
+        this.getListView().setAdapter(this.getFruitListAdapter());
+        this.getGridView().setAdapter(this.getFruitGridAdapter());
     }
 
     private void initArrayFruits() {
@@ -145,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.getFruits().add(fruit);
 
-        this.getFruitAdapter().notifyDataSetChanged();
+        this.getFruitListAdapter().notifyDataSetChanged();
+        this.getFruitGridAdapter().notifyDataSetChanged();
         this.updateCounter();
     }
 
@@ -197,12 +205,12 @@ public class MainActivity extends AppCompatActivity {
         this.fruits = fruits;
     }
 
-    public FruitAdapter getFruitAdapter() {
-        return fruitAdapter;
+    public FruitAdapter getFruitListAdapter() {
+        return fruitListAdapter;
     }
 
-    public void setFruitAdapter(FruitAdapter fruitAdapter) {
-        this.fruitAdapter = fruitAdapter;
+    public void setFruitListAdapter(FruitAdapter fruitListAdapter) {
+        this.fruitListAdapter = fruitListAdapter;
     }
 
     public int getCounter() {
@@ -227,5 +235,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setShowGridViewMenuItem(MenuItem showGridViewMenuItem) {
         this.showGridViewMenuItem = showGridViewMenuItem;
+    }
+
+    public GridView getGridView() {
+        return gridView;
+    }
+
+    public void setGridView(GridView gridView) {
+        this.gridView = gridView;
+    }
+
+    public FruitAdapter getFruitGridAdapter() {
+        return fruitGridAdapter;
+    }
+
+    public void setFruitGridAdapter(FruitAdapter fruitGridAdapter) {
+        this.fruitGridAdapter = fruitGridAdapter;
     }
 }
