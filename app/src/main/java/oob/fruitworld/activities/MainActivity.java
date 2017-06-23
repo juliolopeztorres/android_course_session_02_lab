@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ import oob.fruitworld.R;
 import oob.fruitworld.adapters.FruitAdapter;
 import oob.fruitworld.models.Fruit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private final int FRUIT_INIT_NUMBER = 1;
     private final int FRUIT_NUMBER = 7;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         this.showIconInActionBard();
 
         this.setVariables();
+        this.setListeners();
     }
 
     private void showIconInActionBard() {
@@ -184,6 +187,29 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isLayoutVisible(int layoutToShow) {
         return findViewById(layoutToShow).getVisibility() == View.VISIBLE;
+    }
+
+    private void setListeners() {
+        this.getListView().setOnItemClickListener(this);
+        this.getGridView().setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Fruit fruit = this.getFruits().get(position);
+        this.clickFruitEvent(fruit);
+    }
+
+    private void clickFruitEvent(Fruit fruit) {
+        String message = "The origin of the fruit " + fruit.getName() + " is ";
+        String originMessage = fruit.getOrigin() + " and it's the best! :)";
+
+        if (getString(R.string.fruit_standard_origin).equals(fruit.getOrigin())) {
+            originMessage = " unknown :(";
+        }
+        message += originMessage;
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     // ------------------ Getter & Setters ------------------
