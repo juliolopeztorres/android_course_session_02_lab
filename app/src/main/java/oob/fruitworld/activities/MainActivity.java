@@ -3,6 +3,7 @@ package oob.fruitworld.activities;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.getListView().setAdapter(this.getFruitListAdapter());
         this.getGridView().setAdapter(this.getFruitGridAdapter());
+
+        this.registerForContextMenu(this.getListView());
+        this.registerForContextMenu(this.getGridView());
     }
 
     private void initArrayFruits() {
@@ -155,9 +159,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.getFruits().add(fruit);
 
+        this.notifyChangeToAdapters();
+        this.updateCounter();
+    }
+
+    private void notifyChangeToAdapters() {
         this.getFruitListAdapter().notifyDataSetChanged();
         this.getFruitGridAdapter().notifyDataSetChanged();
-        this.updateCounter();
     }
 
     private void updateCounter() {
@@ -212,8 +220,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    // ------------------ Getter & Setters ------------------
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
 
+        MenuInflater inflater = this.getMenuInflater();
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        menu.setHeaderIcon(R.drawable.delete_fruit);
+        menu.setHeaderTitle(this.getFruits().get(info.position).getName());
+
+        inflater.inflate(R.menu.context_fruit_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.delete_fruit:
+                this.deleteFruit(info.position);
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+        return true;
+    }
+
+    private void deleteFruit(int position) {
+        this.getFruits().remove(position);
+        this.notifyChangeToAdapters();
+    }
+
+    // ------------------ Getter & Setters ------------------
 
     public ListView getListView() {
         return listView;
