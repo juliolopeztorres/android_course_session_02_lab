@@ -2,6 +2,7 @@
     <string name="app_name">FruitWorld</string>
 
     <string name="add_fruit">Add Fruit</string>
+    <string name="delete_fruit">Delete</string>
     <string name="show_listView">Show in List</string>
     <string name="show_gridView">Show in Grid</string>
 
